@@ -32,3 +32,15 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    zipAfterPublish: true
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(26bcf05b-8068-44d1-bf29-71fd533849a4)'
+    appType: 'webApp'
+    WebAppName: '314store'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
