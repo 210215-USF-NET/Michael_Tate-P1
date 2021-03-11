@@ -1,4 +1,6 @@
 # ASP.NET Core (.NET Framework)
+
+
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
@@ -20,7 +22,13 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
-
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'StoreSonarCloud'
+    organization: '210215-usf-net'
+    scannerMode: 'MSBuild'
+    projectKey: '210215-USF-NET_Michael_Tate-P1'
+    projectName: 'Michael_Tate-P1'
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -37,6 +45,10 @@ steps:
     command: 'publish'
     publishWebProjects: true
     zipAfterPublish: true
+    arguments: 
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: 
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
