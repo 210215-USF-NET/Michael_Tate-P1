@@ -18,38 +18,42 @@ namespace StoreDL
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<StoreLocation> StoreLocations { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<StoreLocation> StoreLocation { get; set; }
+        public DbSet<Cart> Cart { get; set; }
+        public DbSet<CartProd> CartProd { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*modelBuilder.Entity<Order>()
-                .HasOne(Order => Order.CustID)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasForeignKey<Customer>(c => c.Id);
-            modelBuilder.Entity<Order>()
-                .HasOne(Order => Order.LocID)
-                .WithOne()
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasForeignKey<StoreLocation>(l => l.Id);
-            modelBuilder.Entity<Order>()
-                .HasOne(Order => Order.ProID)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasForeignKey<Product>(p => p.Id);
-
-            modelBuilder.Entity<Product>()
-                .HasOne(Order => Order.LocationID)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasForeignKey<StoreLocation>(l => l.Id);*/
-
             modelBuilder.Entity<Customer>()
                .Property(Customer => Customer.Id)
                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Cart>()
+               .Property(x => x.Id)
+               .ValueGeneratedOnAdd();
+
+            //modelBuilder.Entity<LocationProduct>()
+            //.Property(x => x.ID)
+            //.ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<StoreLocation>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Order>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+
+            //modelBuilder.Entity<OrderProducts>()
+            //.Property(x => x.ID)
+            //.ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Product>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }

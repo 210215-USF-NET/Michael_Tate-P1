@@ -58,6 +58,8 @@ namespace StoreModels
             }
         }
 
+        public string Password { get; set; }
+
         public int Id { get; set; }
 
         public override string ToString() => $"Customer Details: \n\t name: {this.FirstName} {this.LastName} \n\t phone number: {this.PhoneNumber} \n\t email: {this.Email}";

@@ -19,21 +19,21 @@ namespace StoreDL
 
         public Customer AddCustomer(Customer newCustomer)
         {
-            _context.Customers.Add(newCustomer);
+            _context.Customer.Add(newCustomer);
             _context.SaveChanges();
             return newCustomer;
         }
 
         public Order AddOrder(Order newOrder)
         {
-            _context.Orders.Add(newOrder);
+            _context.Order.Add(newOrder);
             _context.SaveChanges();
             return newOrder;
         }
 
         public Customer DeleteCustomer(Customer customer2BDeleted)
         {
-            _context.Customers.Remove(customer2BDeleted);
+            _context.Customer.Remove(customer2BDeleted);
             _context.SaveChanges();
             return customer2BDeleted;
         }
@@ -50,7 +50,7 @@ namespace StoreDL
 
         public Customer GetCustomerByName(string name)
         {
-            return _context.Customers
+            return _context.Customer
                 .AsNoTracking()
                 .FirstOrDefault(customer => customer.FirstName == name);
         }
@@ -62,7 +62,7 @@ namespace StoreDL
 
         public List<Customer> GetCustomers()
         {
-            return _context.Customers
+            return _context.Customer
                 .AsNoTracking()
                 .Select(customer => customer)
                 .ToList();
@@ -70,7 +70,7 @@ namespace StoreDL
 
         public List<Order> GetOrders()
         {
-            return _context.Orders
+            return _context.Order
                 .Include("Order")
                 .AsNoTracking()
                 .Select(order => order)
@@ -99,7 +99,7 @@ namespace StoreDL
 
         public Customer UpdateCustomer(Customer customer2BUpdated)
         {
-            Customer oldCustomer = _context.Customers.Find(customer2BUpdated.Id);
+            Customer oldCustomer = _context.Customer.Find(customer2BUpdated.Id);
             _context.Entry(oldCustomer).CurrentValues.SetValues(customer2BUpdated);
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
