@@ -18,12 +18,15 @@ namespace StoreDL
         {
         }
 
+        public DbSet<Item> Item { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Order> Order { get; set; }
-        public DbSet<Product> Product { get; set; }
         public DbSet<StoreLocation> StoreLocation { get; set; }
-        public DbSet<Cart> Cart { get; set; }
-        public DbSet<CartProd> CartProd { get; set; }
+        public DbSet<Category> Categorie { get; set; }
+
+        //public DbSet<Cart> Cart { get; set; }
+        //public DbSet<CartProd> CartProd { get; set; }
+        public DbSet<OrderProducts> OrderProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,11 +50,7 @@ namespace StoreDL
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
 
-            //modelBuilder.Entity<OrderProducts>()
-            //.Property(x => x.ID)
-            //.ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<Product>()
+            modelBuilder.Entity<OrderProducts>()
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
         }

@@ -23,7 +23,9 @@ namespace StoreMVC.Controllers
         // GET: CusstomerController
         public ActionResult Index()
         {
-            return View(_storeBL.GetCustomer().Select(customer => _mapper.cast2StoreIndexVM(customer)).ToList());
+            return View(_storeBL.GetCustomer()
+                .Select(customer => _mapper.cast2StoreIndexVM(customer))
+                .ToList());
         }
 
         // GET: CusstomerController/Details/5

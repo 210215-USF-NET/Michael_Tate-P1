@@ -77,21 +77,6 @@ namespace StoreDL
                 .ToList();
         }
 
-        public Product GetPrice()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Product> GetProduct()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Product GetProductByName(int ProductName)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<StoreLocation> GetStoreLocation()
         {
             throw new NotImplementedException();
@@ -104,11 +89,6 @@ namespace StoreDL
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
             return customer2BUpdated;
-        }
-
-        public Product UpdateInventory(Product inv)
-        {
-            throw new NotImplementedException();
         }
     }
 }

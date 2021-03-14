@@ -26,16 +26,8 @@ namespace StoreDL
 
         List<Order> GetCustomerOrders(int custID);
 
-        Product GetProductByName(int ProductName);
-
-        List<Product> GetProduct();
-
-        Product GetPrice();
-
         Customer UpdateCustomer(Customer customer2BUpdated);
 
         Customer DeleteCustomer(Customer customer2BDeleted);
-
-        Product UpdateInventory(Product inv);
     }
 }

@@ -39,16 +39,6 @@ namespace StoreBL
             return _repo.GetCustomerByName(name);
         }
 
-        public Product GetPrice()
-        {
-            return _repo.GetPrice();
-        }
-
-        public List<Product> GetProduct()
-        {
-            return _repo.GetProduct();
-        }
-
         public List<StoreLocation> GetStoreLocation()
         {
             return _repo.GetStoreLocation();
@@ -62,16 +52,6 @@ namespace StoreBL
         public List<Order> GetOrder()
         {
             return _repo.GetOrders();
-        }
-
-        public Product GetProductByName(int ProductName)
-        {
-            return _repo.GetProductByName(ProductName);
-        }
-
-        public Product UpdateInventory(Product inv)
-        {
-            return _repo.UpdateInventory(inv);
         }
     }
 }
