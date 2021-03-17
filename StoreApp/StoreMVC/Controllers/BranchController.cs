@@ -26,8 +26,8 @@ namespace StoreMVC.Controllers
                     Name = branch.Name,
                     IsOpen = _branch.IsBranch(branch.Id),
                     NumberOfAssets = _branch.GetAssets(branch.Id).Count(),
-                    NumberOfPatrons = _branch.GetPatrons(branch.Id).Count()
-                });
+                    //NumberOfPatrons = _branch.GetPatrons(branch.Id).Count()
+                }).ToList();
 
             var model = new BranchIndexModel()
             {
@@ -49,8 +49,8 @@ namespace StoreMVC.Controllers
                 PhoneNumber = branch.PhoneNumber,
                 OpenDate = branch.OpenDate.ToString("yyyy-MM-dd"),
                 NumberOfAssets = _branch.GetAssets(id).Count(),
-                NumberOfPatrons = _branch.GetPatrons(branch.Id).Count(),
-                TotalAssetValue = _branch.GetAssets(id).Sum(a => a.Cost),
+                //NumberOfPatrons = _branch.GetPatrons(branch.Id).Count(),
+                //TotalAssetValue = _branch.GetAssets(id).Sum(a => a.Cost),
                 ImageUrl = branch.ImageUrl,
                 HoursOpen = _branch.GetBranchHours(id).ToList()
             };

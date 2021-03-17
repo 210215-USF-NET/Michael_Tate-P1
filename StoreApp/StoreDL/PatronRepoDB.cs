@@ -17,10 +17,11 @@ namespace StoreDL
             _context = context;
         }
 
-        public void Add(Patron newPatron)
+        public Patron AddPatron(Patron newPatron)
         {
             _context.Add(newPatron);
             _context.SaveChanges();
+            return newPatron;
         }
 
         public Patron Get(int id)

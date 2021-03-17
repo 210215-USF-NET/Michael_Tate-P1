@@ -1,0 +1,55 @@
+﻿@model StoreMVC.Models.Branch.BranchDetailModel
+@{
+    ViewData["Title"] = Model.Name + "Detail";
+}
+<div class="container">
+    <div class="card-header clearfix detailHeading">
+        <h2 class="text-muted">Branch Information</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="rom">
+            <img src="@Model.ImageUrl" />
+        </div>
+        <div class="row branchInfo">
+            <div class="col-md-8">
+                <h2>@Model.Name</h2>
+                <div class="branchContact">
+                    <div id="branchAddress">Address: @Model.Address</div>
+                    <div id="branchTel">Telephone: @Model.PhoneNumber</div>
+                </div>
+                <div id="brachDescription">
+                    <p class="caption">@Model.Description</p>
+                </div>
+
+                <div id="branchHours">
+                    <ul>
+                        @foreach (var day in Model.HoursOpen)
+                        {
+                            <li>@day</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <table>
+                    <tr>
+                        <td class="itemLabel">Data Opened: </td>
+                        <td class="itemValue">@Model.OpenDate</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Number of Patrons: </td>
+                        <td class="itemValue">@Model.NumberOfPatrons</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Number of Assets: </td>
+                        <td class="itemValue">@Model.NumberOfAssets</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Number of Assets: </td>
+                        <td class="itemValue">@Model.TotalAssetValue</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

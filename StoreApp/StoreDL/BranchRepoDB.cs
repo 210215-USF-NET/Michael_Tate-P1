@@ -37,31 +37,30 @@ namespace StoreDL
                 .ToList();
         }
 
-        public List<LibraryAsset> GetAssets(int branchId)
+        public List<LibraryBranch> GetAssets(int branchId)
         {
             return _context.LibraryBranches
                 .Include(b => b.LibraryAssets)
-                .FirstOrDefault(b => b.Id == branchId)
-                .LibraryAssets
                 .ToList();
         }
 
         public List<string> GetBranchHours(int branchId)
         {
             var hours = _context.BranchHours
-                .Where(h => h.Branch.Id == branchId);
+                .Where(h => h.Branch.Id == branchId)
+                .ToList();
 
             return DataHelp.HumanizeWorkHours(hours);
         }
 
-        public List<Patron> GetPatrons(int branchId)
+        /*public List<Patron> GetPatrons(int branchId)
         {
             return _context.LibraryBranches
                 .Include(b => b.Patrons)
                 .FirstOrDefault(b => b.Id == branchId)
-                .Patrons
                 .ToList();
         }
+        */
 
         public bool IsBranch(int branchId)
         {

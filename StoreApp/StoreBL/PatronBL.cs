@@ -17,9 +17,9 @@ namespace StoreBL
             _repo = repo;
         }
 
-        public void Add(Patron newPatron)
+        public Patron AddPatron(Patron newPatron)
         {
-            _repo.Add(newPatron);
+            return _repo.AddPatron(newPatron);
         }
 
         public Patron Get(int id)

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using StoreBL;
+using StoreDL;
 using StoreModels;
 using StoreMVC.Models.PatronModel;
 using System;
@@ -13,9 +15,12 @@ namespace StoreMVC.Controllers
     {
         private IPatronBL _patron;
 
-        public PatronController(IPatronBL patron)
+        private StoreDBContext _context;
+
+        public PatronController(IPatronBL patron, StoreDBContext context)
         {
             _patron = patron;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -60,6 +65,46 @@ namespace StoreMVC.Controllers
             };
 
             return View(model);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Patron newPatron)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var model = new Patron
+                    {
+                        FirstName = newPatron.FirstName,
+                        LastName = newPatron.LastName,
+                        Address = newPatron.Address,
+                        DateOfBirth = newPatron.DateOfBirth,
+                        PhoneNumber = newPatron.PhoneNumber,
+                        LibraryCard = new LibraryCard
+                        {
+                            Id = newPatron.CardId
+                        },
+                        HomeLibraryBranch = new LibraryBranch
+                        {
+                            Id = newPatron.HomeLibraryBranchId
+                        }
+                    };
+                    var patron = _patron.AddPatron(model);
+                    return View(model);
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+            return View();
         }
     }
 }

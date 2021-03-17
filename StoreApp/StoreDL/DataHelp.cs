@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StoreDL
 {
-    internal class DataHelp
+    public class DataHelp
     {
         public static List<string> HumanizeWorkHours(IEnumerable<BranchHours> branchHours)
         {
@@ -14,9 +14,9 @@ namespace StoreDL
             {
                 var day = HumanizeDay(time.DayOfWeek);
                 var openTime = HumanizeDay(time.OpenTime);
-                var closrTime = HumanizeDay(time.DayOfWeek);
+                var closeTime = HumanizeDay(time.CloseTime);
 
-                var timeEntry = $"{day} {openTime} - {closrTime}";
+                var timeEntry = $"{day} {openTime} - {closeTime}";
 
                 hours.Add(timeEntry);
             }
@@ -26,12 +26,12 @@ namespace StoreDL
 
         public static string HumanizeDay(int number)
         {
-            return Enum.GetName(typeof(DayOfWeek), number);
+            return Enum.GetName(typeof(DayOfWeek), number - 1);
         }
 
         public static string HumanizeTime(int time)
         {
-            return TimeSpan.FromHours(time).ToString("hh': 'mm");
+            return TimeSpan.FromHours(time).ToString("hh':'mm");
         }
     }
 }

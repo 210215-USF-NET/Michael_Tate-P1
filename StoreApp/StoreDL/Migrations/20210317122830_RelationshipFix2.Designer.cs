@@ -10,7 +10,7 @@ using StoreDL;
 namespace StoreDL.Migrations
 {
     [DbContext(typeof(StoreDBContext))]
-    [Migration("20210317055348_RelationshipFix2")]
+    [Migration("20210317122830_RelationshipFix2")]
     partial class RelationshipFix2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -234,13 +234,16 @@ namespace StoreDL.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("text");
 
+                    b.Property<int>("CardId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
 
-                    b.Property<int?>("HomeLibraryBranchId")
+                    b.Property<int>("HomeLibraryBranchId")
                         .HasColumnType("integer");
 
                     b.Property<string>("LastName")
@@ -384,7 +387,9 @@ namespace StoreDL.Migrations
                 {
                     b.HasOne("StoreModels.LibraryBranch", "HomeLibraryBranch")
                         .WithMany("Patrons")
-                        .HasForeignKey("HomeLibraryBranchId");
+                        .HasForeignKey("HomeLibraryBranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("StoreModels.LibraryCard", "LibraryCard")
                         .WithMany()

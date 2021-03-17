@@ -1,23 +1,33 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using StoreModels;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreModels
+namespace StoreMVC.Models.PatronModel
 {
-    public class Patron
+    public class CreatePatron
     {
-        public int Id { get; set; }
+        [Required]
         public string FirstName { get; set; }
+
+        [Required]
         public string LastName { get; set; }
+
         public string Address { get; set; }
+
         public DateTime DateOfBirth { get; set; }
+
+        [Required]
         public string PhoneNumber { get; set; }
-        public int CardId { get; set; }
+
+        [Required]
+        [Range(1, 3)]
         public int HomeLibraryBranchId { get; set; }
 
-        public LibraryCard LibraryCard { get; set; }
-        public LibraryBranch HomeLibraryBranch { get; set; }
+        [Required]
+        public int CardId { get; set; }
     }
 }

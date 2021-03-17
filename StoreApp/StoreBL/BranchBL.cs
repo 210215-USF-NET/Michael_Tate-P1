@@ -32,7 +32,7 @@ namespace StoreBL
             return _repo.GetAll();
         }
 
-        public List<LibraryAsset> GetAssets(int branchId)
+        public List<LibraryBranch> GetAssets(int branchId)
         {
             return _repo.GetAssets(branchId);
         }
@@ -42,10 +42,11 @@ namespace StoreBL
             return _repo.GetBranchHours(branchId);
         }
 
-        public List<Patron> GetPatrons(int branchId)
+        /*public List<Patron> GetPatrons(int branchId)
         {
             return _repo.GetPatrons(branchId);
         }
+        */
 
         public bool IsBranch(int branchId)
         {

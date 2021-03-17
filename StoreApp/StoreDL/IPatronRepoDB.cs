@@ -13,7 +13,7 @@ namespace StoreDL
 
         List<Patron> GetAll();
 
-        void Add(Patron newPatron);
+        Patron AddPatron(Patron newPatron);
 
         List<CheckoutHistory> GetCheckoutHistories(int patronId);
 

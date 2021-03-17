@@ -12,9 +12,9 @@ namespace StoreBL
     {
         List<LibraryBranch> GetAll();
 
-        List<Patron> GetPatrons(int branchId);
+        //List<Patron> GetPatrons(int branchId);
 
-        List<LibraryAsset> GetAssets(int branchId);
+        List<LibraryBranch> GetAssets(int branchId);
 
         List<string> GetBranchHours(int branchId);
 

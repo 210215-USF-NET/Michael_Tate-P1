@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-
 namespace StoreMVC.Models.Branch
 {
     public class BranchDetailModel
