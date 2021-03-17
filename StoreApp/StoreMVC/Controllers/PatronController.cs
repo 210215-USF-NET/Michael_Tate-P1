@@ -67,14 +67,14 @@ namespace StoreMVC.Controllers
             return View(model);
         }
 
-        public ActionResult Create()
+        public ActionResult Add()
         {
-            return View();
+            return View("Create");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Patron newPatron)
+        public ActionResult Add(Patron newPatron)
         {
             if (ModelState.IsValid)
             {
@@ -84,17 +84,7 @@ namespace StoreMVC.Controllers
                     {
                         FirstName = newPatron.FirstName,
                         LastName = newPatron.LastName,
-                        Address = newPatron.Address,
-                        DateOfBirth = newPatron.DateOfBirth,
                         PhoneNumber = newPatron.PhoneNumber,
-                        LibraryCard = new LibraryCard
-                        {
-                            Id = newPatron.CardId
-                        },
-                        HomeLibraryBranch = new LibraryBranch
-                        {
-                            Id = newPatron.HomeLibraryBranchId
-                        }
                     };
                     var patron = _patron.AddPatron(model);
                     return View(model);

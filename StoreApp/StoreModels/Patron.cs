@@ -14,8 +14,6 @@ namespace StoreModels
         public string Address { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
-        public int CardId { get; set; }
-        public int HomeLibraryBranchId { get; set; }
 
         public LibraryCard LibraryCard { get; set; }
         public LibraryBranch HomeLibraryBranch { get; set; }

@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using StoreModels;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreDL
 {
@@ -34,6 +29,7 @@ namespace StoreDL
         {
             modelBuilder.Entity<Patron>()
                 .HasOne(c => c.LibraryCard);
+            //.ValueGeneratedOnAdd();
         }
     }
 }
