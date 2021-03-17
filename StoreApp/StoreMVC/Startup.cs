@@ -1,17 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StoreDL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using StoreBL;
+using StoreDL;
 using StoreMVC.Models;
+using System;
 
 namespace StoreMVC
 {
@@ -29,14 +27,40 @@ namespace StoreMVC
         {
             services.AddControllersWithViews();
             services.AddDbContext<StoreDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("StoreAppDB")));
-            services.AddScoped<IStoreRepository, StoreRepoDB>();
-            services.AddScoped<IstoreBL, storeBL>();
-            services.AddScoped<IMapper, Mapper>();
+
+            services.AddScoped<ILibraryAssetBL, LibraryAssetBL>();
+            services.AddScoped<ILibraryAssetRepoDB, LibraryAssetRepoDB>();
+
+            services.AddScoped<ICheckoutBL, CheckoutBL>();
+            services.AddScoped<ICheckoutRepo, CheckoutRepo>();
+
+            services.AddScoped<IPatronBL, PatronBL>();
+            services.AddScoped<IPatronRepoDB, PatronRepoDB>();
+
+            services.AddScoped<IBranchBL, BranchBL>();
+            services.AddScoped<IBranchRepoDB, BranchRepoDB>();
+
+            services.AddDistributedMemoryCache();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
+            app.UseSession();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -53,6 +77,9 @@ namespace StoreMVC
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

@@ -18,41 +18,20 @@ namespace StoreDL
         {
         }
 
-        public DbSet<Item> Item { get; set; }
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Order> Order { get; set; }
-        public DbSet<StoreLocation> StoreLocation { get; set; }
-        public DbSet<Category> Categorie { get; set; }
-
-        //public DbSet<Cart> Cart { get; set; }
-        //public DbSet<CartProd> CartProd { get; set; }
-        public DbSet<OrderProducts> OrderProducts { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Video> Videos { get; set; }
+        public DbSet<CheckoutModel> Checkouts { get; set; }
+        public DbSet<CheckoutHistory> CheckoutHistories { get; set; }
+        public DbSet<LibraryBranch> LibraryBranches { get; set; }
+        public DbSet<BranchHours> BranchHours { get; set; }
+        public DbSet<LibraryCard> LibraryCards { get; set; }
+        public DbSet<Patron> Patrons { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<LibraryAsset> LibraryAssets { get; set; }
+        public DbSet<Hold> Holds { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>()
-               .Property(Customer => Customer.Id)
-               .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<Cart>()
-               .Property(x => x.Id)
-               .ValueGeneratedOnAdd();
-
-            //modelBuilder.Entity<LocationProduct>()
-            //.Property(x => x.ID)
-            //.ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<StoreLocation>()
-                .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<Order>()
-                .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<OrderProducts>()
-                .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
         }
     }
 }

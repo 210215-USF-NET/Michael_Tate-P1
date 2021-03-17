@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StoreDL;
@@ -9,9 +10,10 @@ using StoreDL;
 namespace StoreDL.Migrations
 {
     [DbContext(typeof(StoreDBContext))]
-    partial class StoreDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210315193155_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,6 +47,34 @@ namespace StoreDL.Migrations
                     b.ToTable("BranchHours");
                 });
 
+            modelBuilder.Entity("StoreModels.Checkout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("LibraryAssetId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LibraryCardId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Since")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("Until")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LibraryAssetId");
+
+                    b.HasIndex("LibraryCardId");
+
+                    b.ToTable("Checkouts");
+                });
+
             modelBuilder.Entity("StoreModels.CheckoutHistory", b =>
                 {
                     b.Property<int>("Id")
@@ -71,34 +101,6 @@ namespace StoreDL.Migrations
                     b.HasIndex("LibraryCardId");
 
                     b.ToTable("CheckoutHistories");
-                });
-
-            modelBuilder.Entity("StoreModels.CheckoutModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int?>("LibraryAssetId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("LibraryCardId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Since")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("Until")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LibraryAssetId");
-
-                    b.HasIndex("LibraryCardId");
-
-                    b.ToTable("Checkouts");
                 });
 
             modelBuilder.Entity("StoreModels.Hold", b =>
@@ -195,7 +197,7 @@ namespace StoreDL.Migrations
                     b.Property<DateTime>("OpenDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("Telephone")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -318,6 +320,21 @@ namespace StoreDL.Migrations
                     b.Navigation("Branch");
                 });
 
+            modelBuilder.Entity("StoreModels.Checkout", b =>
+                {
+                    b.HasOne("StoreModels.LibraryAsset", "LibraryAsset")
+                        .WithMany()
+                        .HasForeignKey("LibraryAssetId");
+
+                    b.HasOne("StoreModels.LibraryCard", "LibraryCard")
+                        .WithMany("Checkouts")
+                        .HasForeignKey("LibraryCardId");
+
+                    b.Navigation("LibraryAsset");
+
+                    b.Navigation("LibraryCard");
+                });
+
             modelBuilder.Entity("StoreModels.CheckoutHistory", b =>
                 {
                     b.HasOne("StoreModels.LibraryAsset", "LibraryAsset")
@@ -326,21 +343,6 @@ namespace StoreDL.Migrations
 
                     b.HasOne("StoreModels.LibraryCard", "LibraryCard")
                         .WithMany()
-                        .HasForeignKey("LibraryCardId");
-
-                    b.Navigation("LibraryAsset");
-
-                    b.Navigation("LibraryCard");
-                });
-
-            modelBuilder.Entity("StoreModels.CheckoutModel", b =>
-                {
-                    b.HasOne("StoreModels.LibraryAsset", "LibraryAsset")
-                        .WithMany()
-                        .HasForeignKey("LibraryAssetId");
-
-                    b.HasOne("StoreModels.LibraryCard", "LibraryCard")
-                        .WithMany("Checkouts")
                         .HasForeignKey("LibraryCardId");
 
                     b.Navigation("LibraryAsset");

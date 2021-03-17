@@ -1,0 +1,34 @@
+﻿@model StoreMVC.Models.Checkout.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container">
+    <div class="card-header clearfix detailHeading">
+        <h2 class="text-muted">Checkout Library Item</h2>
+    </div>
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="clo-md-3">
+                <div>
+                    <p id="itemTitle">Model.Title</p>
+                    <img class="detailImage" src="@Model.ImageUrl" />
+                </div>
+            </div>
+            <div class="col-md-9">
+                @using (Html.BeginForm("PlaceCheckout", "Catalog", FormMethod.Post))
+                {
+                    @Html.HiddenFor(a => a.AssetId)
+                    <div>
+                        Please Insert a Library Card ID.
+                        @Html.TextBoxFor(a => a.LibraryCardId)
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success btn-lg">Check Out</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
