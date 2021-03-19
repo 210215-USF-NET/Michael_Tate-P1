@@ -72,5 +72,12 @@ namespace StoreDL
                 .OrderByDescending(h => h.HoldPlaced)
                 .ToList();
         }
+
+        public Patron GetPatronByName(string name)
+        {
+            return _context.Patrons
+                .AsNoTracking()
+                .FirstOrDefault(pat => pat.FirstName.ToLower().Equals(name.ToLower()));
+        }
     }
 }

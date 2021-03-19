@@ -46,5 +46,10 @@ namespace StoreBL
         {
             return _repo.GetHolds(patronId);
         }
+
+        public Patron GetPatronByName(string name)
+        {
+            return _repo.GetPatronByName(name);
+        }
     }
 }

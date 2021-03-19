@@ -15,8 +15,8 @@ namespace StoreMVC.Models
             {
                 FirstName = newPatron.FirstName,
                 LastName = newPatron.LastName,
-                Address = newPatron.Address,
-                DateOfBirth = newPatron.DateOfBirth,
+                //Address = newPatron.Address,
+                //DateOfBirth = newPatron.DateOfBirth,
                 PhoneNumber = newPatron.PhoneNumber
             };
         }

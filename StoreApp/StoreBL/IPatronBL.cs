@@ -20,5 +20,7 @@ namespace StoreBL
         List<Hold> GetHolds(int patronId);
 
         List<CheckoutModel> GetCheckouts(int patronId);
+
+        Patron GetPatronByName(string name);
     }
 }

@@ -5,7 +5,10 @@
 
 <h3>Patron Index</h3>
 <p>
-    @*<a asp-action="Add">Add a hero to the stable</a>*@
+    <a asp-action="Add">Add a new Patron</a>
+</p>
+<p>
+    <a asp-action="StartSearch">Search Patron By Card ID</a>
 </p>
 <div id="patronIndex">
     <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp customeTable" id="patronIndexTable">
@@ -16,7 +19,7 @@
                 <th>First Name</th>
                 <th>Library Card Id</th>
                 <th>Overdue Fees</th>
-                <th>Home Library</th>
+                @*<th>Home Library</th>*@
             </tr>
         </thead>
         <tbody>
@@ -28,7 +31,7 @@
                     <td>@patron.FirstName</td>
                     <td>@patron.LibraryCardId</td>
                     <td>@patron.OverdueFees</td>
-                    <td>@patron.HomeLibraryBranch</td>
+                    @*<td>@patron.HomeLibraryBranch</td>*@
                 </tr>
             }
         </tbody>

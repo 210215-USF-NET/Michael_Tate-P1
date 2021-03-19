@@ -34,7 +34,7 @@ namespace StoreMVC.Controllers
                 LastName = p.LastName,
                 LibraryCardId = p.LibraryCard.Id,
                 OverdueFees = p.LibraryCard.Fees,
-                HomeLibraryBranch = p.HomeLibraryBranch.Name
+                //HomeLibraryBranch = p.HomeLibraryBranch.Name
             }).ToList();
 
             var model = new PatronIndex()
@@ -54,7 +54,7 @@ namespace StoreMVC.Controllers
                 LastName = patron.LastName,
                 FirstName = patron.FirstName,
                 Address = patron.Address,
-                HomeLibraryBranch = patron.HomeLibraryBranch.Name,
+                //HomeLibraryBranch = patron.HomeLibraryBranch.Name,
                 MemberSince = patron.LibraryCard.Created,
                 OverdueFees = patron.LibraryCard.Fees,
                 LibraryCardId = patron.LibraryCard.Id,
@@ -69,7 +69,7 @@ namespace StoreMVC.Controllers
 
         public ActionResult Add()
         {
-            return View("Create");
+            return View();
         }
 
         [HttpPost]
@@ -85,9 +85,16 @@ namespace StoreMVC.Controllers
                         FirstName = newPatron.FirstName,
                         LastName = newPatron.LastName,
                         PhoneNumber = newPatron.PhoneNumber,
+
+                        LibraryCard = new LibraryCard
+                        {
+                            Id = newPatron.Id
+                        }
                     };
-                    var patron = _patron.AddPatron(model);
-                    return View(model);
+
+                    _patron.AddPatron(model);
+
+                    return View();
                 }
                 catch
                 {
@@ -95,6 +102,17 @@ namespace StoreMVC.Controllers
                 }
             }
             return View();
+        }
+
+        public ActionResult StartSearch()
+        {
+            return View();
+        }
+
+        public ActionResult Search(string name)
+        {
+            Patron p = _patron.GetPatronByName(name);
+            return View(p);
         }
     }
 }

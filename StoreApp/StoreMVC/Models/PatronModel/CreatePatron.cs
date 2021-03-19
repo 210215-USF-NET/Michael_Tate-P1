@@ -16,18 +16,16 @@ namespace StoreMVC.Models.PatronModel
         [Required]
         public string LastName { get; set; }
 
-        public string Address { get; set; }
-
-        public DateTime DateOfBirth { get; set; }
-
         [Required]
         public string PhoneNumber { get; set; }
 
         [Required]
         [Range(1, 3)]
-        public int HomeLibraryBranchId { get; set; }
+        public LibraryBranch HomeLibraryBranchId { get; set; }
 
         [Required]
-        public int CardId { get; set; }
+        public LibraryCard Id { get; set; }
+
+        public IEnumerable<SelectListItem> LocationSelectListItem { get; set; }
     }
 }

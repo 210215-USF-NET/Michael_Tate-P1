@@ -27,9 +27,6 @@ namespace StoreDL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Patron>()
-                .HasOne(c => c.LibraryCard);
-            //.ValueGeneratedOnAdd();
         }
     }
 }
